@@ -295,10 +295,6 @@
       <Project>{d30b715a-39ee-412d-9dfc-6f2f1435b8c3}</Project>
       <Name>MyShop.DataAccess.InMemory</Name>
     </ProjectReference>
-    <ProjectReference Include="..\MyShop.DataAccess.SQL\MyShop.DataAccess.SQL.csproj">
-      <Project>{55396d03-8942-4a12-8fd4-bd2d3baa1884}</Project>
-      <Name>MyShop.DataAccess.SQL</Name>
-    </ProjectReference>
     <ProjectReference Include="..\MyShop.Services\MyShop.Services.csproj">
       <Project>{6a748c81-ae39-4306-b7b7-2e395c255c7a}</Project>
       <Name>MyShop.Services</Name>
