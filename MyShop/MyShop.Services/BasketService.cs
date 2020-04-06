@@ -63,28 +63,31 @@ namespace MyShop.Services
 
         public void AddToBasket(HttpContextBase httpContext,string productID)
         {
-            Basket basket = GetBasket(httpContext, false);
-            BasketItem item = basket.BasketItems.FirstOrDefault(i => i.ProductID == productID);
-            if(item != null)
+            Basket basket = GetBasket(httpContext, true);
+            if (basket != null)
             {
-                item.Quantity++;
-            }
-            else
-            {
-                item = new BasketItem()
+                BasketItem item = basket.BasketItems.FirstOrDefault(i => i.ProductID == productID);
+                if (item != null)
                 {
-                    BasketID = basket.Id,
-                    Quantity = 1,
-                    ProductID = productID
-                };
-                basket.BasketItems.Add(item);
+                    item.Quantity++;
+                }
+                else
+                {
+                    item = new BasketItem()
+                    {
+                        BasketID = basket.Id,
+                        Quantity = 1,
+                        ProductID = productID
+                    };
+                    basket.BasketItems.Add(item);
+                }
+                basketContext.Commit();
             }
-            basketContext.Commit();
         }
 
         public void RemoveFromBasket(HttpContextBase httpContext,string basketItemID)
         {
-            Basket basket = GetBasket(httpContext, true);
+            Basket basket = GetBasket(httpContext, false);
             BasketItem item = basket.BasketItems.FirstOrDefault(i => i.Id == basketItemID);
             if(item != null)
             {
@@ -95,7 +98,7 @@ namespace MyShop.Services
 
         public List<BasketItemViewModel> GeteBasketItems(HttpContextBase httpContext)
         {
-            Basket basket = GetBasket(httpContext, false);
+            Basket basket = GetBasket(httpContext, true);
             if(basket != null)
             {
                 var results = (from b in basket.BasketItems
